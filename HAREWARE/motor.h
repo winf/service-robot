@@ -18,10 +18,10 @@
 #define MOTOR4_SPEED(X)	TIM4->CCR4=(X)
 
 
-#define MOTOR1_EN	       PFout(4)
-#define MOTOR2_EN	       PFout(5)
-#define MOTOR3_EN	       PEout(14)
-#define MOTOR4_EN	       PEout(15)
+#define MOTOR1_EN(x)	      PFout(4)=(x)
+#define MOTOR2_EN(x)       PFout(5)=(x)
+#define MOTOR3_EN(x)       PEout(14)=(x)
+#define MOTOR4_EN(x)	      PEout(15)=(x)
 
 #define MOTOR1_IN1       PFout(0)
 #define MOTOR1_IN2       PFout(2)
@@ -34,59 +34,59 @@
 
 #define MOTOR1_FORWARD  do{\
 								MOTOR1_IN1=1;\
-								MOTRO1_IN2=0;\
+								MOTOR1_IN2=0;\
 							}while(0)
 #define MOTOR1_BACK  do{\
 								MOTOR1_IN1=0;\
-								MOTRO1_IN2=1;\
+								MOTOR1_IN2=1;\
 							}while(0)
 
 #define MOTOR1_STOP  do{\
 								MOTOR1_IN1=0;\
-								MOTRO1_IN2=0;\
+								MOTOR1_IN2=0;\
 							}while(0)
 
 #define MOTOR2_FORWARD  do{\
 								MOTOR2_IN1=1;\
-								MOTRO2_IN2=0;\
+								MOTOR2_IN2=0;\
 							}while(0)
 #define MOTOR2_BACK  do{\
 								MOTOR2_IN1=0;\
-								MOTRO2_IN2=1;\
+								MOTOR2_IN2=1;\
 							}while(0)
 
 #define MOTOR2_STOP  do{\
 								MOTOR2_IN1=0;\
-								MOTRO2_IN2=0;\
+								MOTOR2_IN2=0;\
 							}while(0)
 
 #define MOTOR3_FORWARD  do{\
 								MOTOR3_IN1=1;\
-								MOTRO3_IN2=0;\
+								MOTOR3_IN2=0;\
 							}while(0)
 
 #define MOTOR3_BACK  do{\
 								MOTOR3_IN1=0;\
-								MOTRO3_IN2=1;\
+								MOTOR3_IN2=1;\
 							}while(0)
 
 #define MOTOR3_STOP  do{\
 								MOTOR3_IN1=0;\
-								MOTRO3_IN2=0;\
+								MOTOR3_IN2=0;\
 							}while(0)
 
 #define MOTOR4_FORWARD  do{\
 								MOTOR4_IN1=1;\
-								MOTRO4_IN2=0;\
+								MOTOR4_IN2=0;\
 							}while(0)
 #define MOTOR4_BACK  do{\
 								MOTOR4_IN1=0;\
-								MOTRO4_IN2=1;\
+								MOTOR4_IN2=1;\
 							}while(0)
 
 #define MOTOR4_STOP  do{\
 								MOTOR4_IN1=0;\
-								MOTRO4_IN2=0;\
+								MOTOR4_IN2=0;\
 							}while(0)
 
 
