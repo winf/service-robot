@@ -20,17 +20,17 @@
 
 #define MOTOR1_EN(x)	      PFout(4)=(x)
 #define MOTOR2_EN(x)       PFout(5)=(x)
-#define MOTOR3_EN(x)       PEout(14)=(x)
-#define MOTOR4_EN(x)	      PEout(15)=(x)
+#define MOTOR3_EN(x)       PEout(4)=(x)
+#define MOTOR4_EN(x)	      PEout(5)=(x)
 
 #define MOTOR1_IN1       PFout(0)
 #define MOTOR1_IN2       PFout(2)
 #define MOTOR2_IN1       PFout(1)
 #define MOTOR2_IN2       PFout(3)
-#define MOTOR3_IN1       PEout(10)
-#define MOTOR3_IN2       PEout(12)
-#define MOTOR4_IN1       PEout(11)
-#define MOTOR4_IN2       PEout(13)
+#define MOTOR3_IN1       PEout(0)
+#define MOTOR3_IN2       PEout(2)
+#define MOTOR4_IN1       PEout(1)
+#define MOTOR4_IN2       PEout(3)
 
 #define MOTOR1_FORWARD  do{\
 								MOTOR1_IN1=1;\
