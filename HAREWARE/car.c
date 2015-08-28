@@ -31,8 +31,8 @@ void car_left(void){
 
 	MOTOR1_FORWARD;
 	MOTOR2_BACK;
-	MOTOR3_FORWARD;
-	MOTOR4_BACK;
+	MOTOR3_BACK;
+	MOTOR4_FORWARD;
 
 }
 
@@ -40,8 +40,8 @@ void car_right(void){
 
 	MOTOR1_BACK;
 	MOTOR2_FORWARD;
-	MOTOR3_BACK;
-	MOTOR4_FORWARD;
+	MOTOR3_FORWARD;
+	MOTOR4_BACK;
 
 }
 
@@ -101,6 +101,7 @@ void car_set(const unsigned char *param){
 	MOTOR2_SPEED(param[5]);
 	MOTOR3_SPEED(param[6]);
 	MOTOR4_SPEED(param[7]);
+	car_resume();
 }
 
 
