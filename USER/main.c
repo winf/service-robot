@@ -12,6 +12,14 @@
 	delay_init();//初始化延时
 	uart1_init(72,115200);
 	motor_init();
+	MOTOR1_FORWARD;
+	MOTOR2_FORWARD;
+	MOTOR3_BACK;
+	MOTOR4_BACK;
+	MOTOR1_SPEED(40);
+	MOTOR2_SPEED(40);
+	MOTOR3_SPEED(40);
+	MOTOR4_SPEED(40);
 	while(1){
 	};
 
