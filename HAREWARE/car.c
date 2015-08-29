@@ -6,6 +6,7 @@
  */
 
 #include "car.h"
+#include "uart.h"
 
 
 void car_forward(void){
@@ -69,39 +70,72 @@ void car_resume(void){
 	MOTOR4_EN(1);
 }
 
+void car_circle(int dir){
+	if(dir){
+		MOTOR1_FORWARD;
+		MOTOR2_FORWARD;
+		MOTOR3_BACK;
+		MOTOR4_BACK;
+
+	}else{
+		MOTOR1_BACK;
+		MOTOR2_BACK;
+		MOTOR3_FORWARD;
+		MOTOR4_FORWARD;
+
+	}
+
+}
+
 
 void car_set(const unsigned char *param){
 
-	car_standby();
+	int i;
 
+	uart_printf("\r\nparam\r\n");
+	for(i=0;i < 8; i++){
+		uart_printf("%c",param[i]);
+	}
+	uart_printf("\r\n");
 	switch(param[0]){
 	case 'F': MOTOR1_FORWARD;
+	break;
 	case 'B': MOTOR1_BACK;
+	break;
 	case 'S': MOTOR1_STOP;
+	break;
 	}
 
 	switch(param[1]){
 	case 'F': MOTOR2_FORWARD;
+	break;
 	case 'B': MOTOR2_BACK;
+	break;
 	case 'S': MOTOR2_STOP;
+	break;
 	}
 	switch(param[2]){
 	case 'F': MOTOR3_FORWARD;
+	break;
 	case 'B': MOTOR3_BACK;
+	break;
 	case 'S': MOTOR3_STOP;
+	break;
 	}
 
 	switch(param[3]){
 	case 'F': MOTOR4_FORWARD;
+	break;
 	case 'B': MOTOR4_BACK;
+	break;
 	case 'S': MOTOR4_STOP;
+	break;
 	}
 
 	MOTOR1_SPEED(param[4]);
 	MOTOR2_SPEED(param[5]);
 	MOTOR3_SPEED(param[6]);
 	MOTOR4_SPEED(param[7]);
-	car_resume();
 }
 
 

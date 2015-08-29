@@ -37,6 +37,12 @@ void cmd_handle(void){
 	case 'y'://待机
 		car_standby();
 		break;
+	case  'c'://转
+		car_circle(1);
+		break;
+	case  'd'://反转
+		car_circle(0);
+		break;
 	case 't'://设置参数
 		for(i=0;i<8;i++){
 			cmd_param[i]=uart1_receive();

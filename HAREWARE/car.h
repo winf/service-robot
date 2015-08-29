@@ -22,5 +22,6 @@ void car_stop(void);
 void car_standby(void);
 void car_resume(void);
 void car_set(const unsigned char *param);
+void car_circle(int dir);
 
 #endif /* CAR_H_ */
