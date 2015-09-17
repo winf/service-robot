@@ -3,6 +3,41 @@
 
 
 
+//TIM4 CH1,2,3,4 PWM输出设置
+//PWM输出初始化
+//arr：自动重装值
+//psc：时钟预分频数
+void TIM2_PWM_Init(u16 arr,u16 psc)
+{
+	//此部分需手动修改IO口设置
+	RCC->APB1ENR|=1<<0; 	//TIM4时钟使能
+	RCC->APB2ENR|=1<<2|1<<3;    	//使能PORTB,A时钟
+
+	GPIOA->CRH&=0X0FFFFFFF;	//PA15输出
+	GPIOA->CRH|=0XB0000000;	//复用功能输出
+
+	GPIOB->CRL&=0XFFFF0FFF;	//PB3输出
+	GPIOB->CRL|=0X0000B000;	//复用功能输出
+	GPIOB->CRH&=0XFFFF00FF;	//PB10,11输出
+	GPIOB->CRH|=0X0000BB00;	//复用功能输出
+
+
+
+	TIM2->ARR=arr;			//设定计数器自动重装值
+	TIM2->PSC=psc;			//预分频器分频设置
+
+	TIM2->CCMR1|=7<<4 | 7<<12;  	//CH1和CH2 PWM2模式
+	TIM2->CCMR1|=1<<3 | 1<<11; 		//CH1和CH2 预装载使能
+	TIM2->CCMR2|=7<<4 | 7<<12;  	//CH3和CH4 PWM2模式
+	TIM2->CCMR2|=1<<3 | 1<<11; 		//CH3和CH4 预装载使能
+	AFIO->MAPR&= ~(3<<8); //清除MAPR的[9:8]
+	AFIO->MAPR|=3<<8;      //完全重映像,CH1/ETR/PA15,CH2/PB3,CH3/PB10,CH4/PB11)
+
+	TIM2->CCER|=3<<12|3<<8|3<<4|3<<0;   	//OC1,,2,3,4 低电平有效 OC1,2,3,4 输出使能
+
+	TIM2->CR1=0x0080;   	//ARPE使能
+	TIM2->CR1|=0x01;    	//使能定时器4
+}
 
 //TIM4 CH1,2,3,4 PWM输出设置
 //PWM输出初始化
@@ -144,4 +179,5 @@ void TIM8_PWM_Init(u16 arr,u16 psc)
 	TIM8->CR1=0x0080;   	//ARPE使能
 	TIM8->CR1|=0x01;    	//使能定时器8
 }
+
 

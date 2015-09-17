@@ -82,6 +82,7 @@ void jtag_set(u8 mode);//设置jtag模式
 void nvic_set_group(u8 group);//设置中断分组
 void nvic_set_pr(u8 group,u8 interrupt,u8 priority1,u8 priority2 );//设置中断的优先级
 void MSR_MSP( u32 addr);//设置堆栈指针
+void Ex_NVIC_Config(u8 GPIOx,u8 BITx,u8 TRIM);
 
 
 #endif

@@ -7,43 +7,68 @@
 
 #include "car.h"
 #include "uart.h"
+#include "delay.h"
 
+static int speed[4]={30,30,30,30};
+static int speed_low[40]={10,10,10,10};
+
+void CAR_SET_SPEED(int *sp){
+	MOTOR1_SPEED(sp[0]);
+	MOTOR2_SPEED(sp[0]);
+	MOTOR3_SPEED(sp[0]);
+	MOTOR4_SPEED(sp[0]);
+}
+
+void car_init(void){
+	motor_init();
+	CAR_SET_SPEED(speed);
+}
 
 void car_forward(void){
-
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	MOTOR1_FORWARD;
 	MOTOR2_FORWARD;
 	MOTOR3_FORWARD;
 	MOTOR4_FORWARD;
+	delay_ms(500);
+	CAR_SET_SPEED(speed);//回复原始速度
 
 }
 
 
 void car_back(void){
 
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	MOTOR1_BACK;
 	MOTOR2_BACK;
 	MOTOR3_BACK;
 	MOTOR4_BACK;
-
+	delay_ms(500);
+	CAR_SET_SPEED(speed);//回复原始速度
 }
 
 void car_left(void){
-
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	MOTOR1_FORWARD;
 	MOTOR2_BACK;
 	MOTOR3_BACK;
 	MOTOR4_FORWARD;
-
+	delay_ms(500);
+	CAR_SET_SPEED(speed);//回复原始速度
 }
 
 void car_right(void){
-
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	MOTOR1_BACK;
 	MOTOR2_FORWARD;
 	MOTOR3_FORWARD;
 	MOTOR4_BACK;
-
+	delay_ms(500);
+	CAR_SET_SPEED(speed);//回复原始速度
 }
 
 void car_stop(void){
@@ -71,6 +96,8 @@ void car_resume(void){
 }
 
 void car_circle(int dir){
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	if(dir){
 		MOTOR1_FORWARD;
 		MOTOR2_FORWARD;
@@ -84,19 +111,16 @@ void car_circle(int dir){
 		MOTOR4_FORWARD;
 
 	}
-
+	delay_ms(500);
+	CAR_SET_SPEED(speed);//回复原始速度
 }
 
 
 void car_set(const unsigned char *param){
 
-	int i;
 
-	uart_printf("\r\nparam\r\n");
-	for(i=0;i < 8; i++){
-		uart_printf("%c",param[i]);
-	}
-	uart_printf("\r\n");
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	switch(param[0]){
 	case 'F': MOTOR1_FORWARD;
 	break;
@@ -132,10 +156,12 @@ void car_set(const unsigned char *param){
 	break;
 	}
 
-	MOTOR1_SPEED(param[4]);
-	MOTOR2_SPEED(param[5]);
-	MOTOR3_SPEED(param[6]);
-	MOTOR4_SPEED(param[7]);
+	speed[0]=param[4];
+	speed[1]=param[5];
+	speed[2]=param[6];
+	speed[3]=param[7];
+	delay_ms(500);
+	CAR_SET_SPEED(speed);
 }
 
 

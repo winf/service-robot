@@ -16,6 +16,7 @@ void uart1_init(u32 clk, u32 bound) //串口一初始化
 	mantissa += fraction;
 
 	RCC ->APB2ENR |= 1 << 2 | 1 << 14;		 //使能PA,usart1时钟
+	RCC->APB2ENR|=0x01;//使能io复用时钟
 	GPIOA ->CRH &= 0XFFFFF00F;		 //设置io口
 	GPIOA ->CRH |= 0X000008B0;
 
@@ -38,7 +39,7 @@ void uart2_init(u32 clk, u32 bound)	//串口二初始化
 	fraction = (temp - mantissa) * 16;		 //取小数部分
 	mantissa <<= 4;
 	mantissa += fraction;
-
+	RCC->APB2ENR|=0x01;//使能io复用时钟
 	RCC ->APB2ENR |= 1 << 2;		 //使能PA时钟
 	RCC ->APB1ENR |= 1 << 17;		 //使能PAusart2时钟
 	GPIOA ->CRL &= 0XFFFF00FF;		 //设置io口
@@ -65,6 +66,7 @@ void uart3_init(u32 clk, u32 bound) //串口一初始化
 
 	RCC ->APB2ENR |= 1 << 3 ;		 //使能PB,usart3时钟
 	RCC ->APB1ENR |= 1 << 18;		 //使能PAusart3时钟
+	RCC->APB2ENR|=0x01;//使能io复用时钟
 	GPIOB ->CRH &= 0XFFFF00FF;		 //设置io口
 	GPIOB ->CRH |= 0X0000BB00;
 	GPIOB->ODR |= 3<<10;

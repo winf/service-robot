@@ -7,6 +7,24 @@
 #include "led.h"
 #include "motor.h"
 #include "car.h"
+#include "steering.h"
+#include "hwbz.h"
+#include "power.h"
+
+
+#define CMD_FORWARD  	'f'
+#define CMD_BACK     	'b'
+#define CMD_LEFT     	'l'
+#define CMD_RIGHT    	'r'
+#define CMD_STOP     	's'
+#define CMD_INIT     	'i'
+#define CMD_STANDBY  	'y'
+#define CMD_CIRCLE1 		'c'
+#define CMD_CIRCLE2		'd'
+#define CMD_MOTOR_SET	't'
+#define CMD_RESUME  		'e'
+#define CMD_POWER_SET	'p'
+#define CMD_STEER_SET	'g'
 
 void cmd_handle(void){
 	unsigned char cmd;
@@ -16,34 +34,34 @@ void cmd_handle(void){
 	cmd = uart1_receive();
 	uart1_send_char(cmd);
 	switch(cmd){
-	case 'f'://前进
+	case CMD_FORWARD://前进
 		car_forward();
 		break;
-	case 'b'://后退
+	case CMD_BACK ://后退
 		car_back();
 		break;
-	case 'l'://向左移动
+	case CMD_LEFT://向左移动
 		car_left();
 		break;
-	case 'r'://向右移动
+	case CMD_RIGHT://向右移动
 		car_right();
 		break;
-	case 's'://制动
+	case CMD_STOP://制动
 		car_stop();
 		break;
-	case 'i'://初始化
+	case CMD_INIT://初始化
 		car_init();
 		break;
-	case 'y'://待机
+	case CMD_STANDBY://待机
 		car_standby();
 		break;
-	case  'c'://转
+	case  CMD_CIRCLE1://转
 		car_circle(1);
 		break;
-	case  'd'://反转
+	case  CMD_CIRCLE2://反转
 		car_circle(0);
 		break;
-	case 't'://设置参数
+	case CMD_MOTOR_SET://设置参数
 		for(i=0;i<8;i++){
 			cmd_param[i]=uart1_receive();
 		}
@@ -52,31 +70,44 @@ void cmd_handle(void){
 			uart1_send_char(cmd_param[i]);
 		}
 		break;
-	case 'e'://恢复
+	case CMD_RESUME://恢复
 		car_resume();
 		break;
-	default:;
+	case CMD_POWER_SET:
+		for(i=0;i<2;i++){
+			cmd_param[i]=uart1_receive();
+		}
+		power_set(cmd_param);
+		for(i=0;i<2;i++){
+			uart1_send_char(cmd_param[i]);
+		}
+		break;
+	case CMD_STEER_SET:
+		for(i=0;i<3;i++){
+			cmd_param[i]=uart1_receive();
+		}
+		steering_set(cmd_param);
+		for(i=0;i<3;i++){
+			uart1_send_char(cmd_param[i]);
+		}
+		break;
+	default:break;
 	}
 }
    
  int main(void){
     sys_init();	 //配置系统时钟72M(包括clock, PLL and Flash configuration)
 	delay_init();//初始化延时
-	uart2_init(72,9600);
 	uart1_init(72,9600);
-//	motor_init();
-//	MOTOR1_FORWARD;
-//	MOTOR2_FORWARD;
-//	MOTOR3_BACK;
-//	MOTOR4_BACK;
-//	MOTOR1_SPEED(40);
-//	MOTOR2_SPEED(40);
-//	MOTOR3_SPEED(40);
-//	MOTOR4_SPEED(40);
-	uart1_send_char('o');
+	motor_init();
+	jtag_set(2);//禁止JTAG,释放PB3,PA15
+	Steering_Init();
+	car_forward();
+	uart_printf("ok\r\n");
+	hwbz_init();
+	power_init();
 	while(1){
 		cmd_handle();
-
 	};
 
 	return 0;

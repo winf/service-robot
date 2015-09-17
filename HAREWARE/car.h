@@ -11,9 +11,9 @@
 
 #include "motor.h"
 
-#define car_init() motor_init()
 
 
+void car_init(void);
 void car_forward(void);
 void car_right(void);
 void car_left(void);
@@ -23,5 +23,6 @@ void car_standby(void);
 void car_resume(void);
 void car_set(const unsigned char *param);
 void car_circle(int dir);
+void CAR_SET_SPEED(int *sp);
 
 #endif /* CAR_H_ */
