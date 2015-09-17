@@ -1,0 +1,40 @@
+
+
+#ifndef __STEERING_H
+#define __STEERING_H
+
+#include "sys.h"
+
+#define STEERINT_Q_DELAY		200  //单位ms
+#define STEERINT_R_DELAY		200  //单位ms
+#define STEERINT_L_DELAY		200  //单位ms
+
+
+#define STEERING_1(X)	TIM5->CCR1=(X)*(2500-500)/180+500
+#define STEERING_2(X)	TIM5->CCR2=(X)*(2500-500)/180+500
+#define STEERING_3(X)	TIM5->CCR3=(X)*(2500-500)/180+500
+#define STEERING_4(X)	TIM5->CCR4=(X)*(2500-500)/180+500
+#define STEERING_5(X)	TIM3->CCR1=(X)*(2500-500)/180+500
+#define STEERING_6(X)	TIM3->CCR2=(X)*(2500-500)/180+500
+#define STEERING_7(X)	TIM3->CCR3=(X)*(2500-500)/180+500
+#define STEERING_8(X)	TIM3->CCR4=(X)*(2500-500)/180+500
+#define STEERING_9(X)	TIM8->CCR1=(X)*(2500-500)/180+500
+#define STEERING_10(X)	TIM8->CCR2=(X)*(2500-500)/180+500
+#define STEERING_11(X)	TIM8->CCR3=(X)*(2500-500)/180+500
+#define STEERING_12(X)	TIM8->CCR4=(X)*(2500-500)/180+500
+#define STEERING_13(X)	TIM1->CCR1=(X)*(2500-500)/180+500
+#define STEERING_14(X)	TIM1->CCR4=(X)*(2500-500)/180+500
+#define STEERING_15(X)	TIM4->CCR1=(X)*(2500-500)/180+500
+#define STEERING_16(X)	TIM4->CCR2=(X)*(2500-500)/180+500
+#define STEERING_17(X)	TIM4->CCR3=(X)*(2500-500)/180+500
+#define STEERING_18(X)	TIM4->CCR4=(X)*(2500-500)/180+500
+#define STEERING_19(X)	TIM2->CCR1=(X)*(2500-500)/180+500
+#define STEERING_20(X)	TIM2->CCR2=(X)*(2500-500)/180+500
+#define STEERING_21(X)	TIM2->CCR3=(X)*(2500-500)/180+500
+#define STEERING_22(X)	TIM2->CCR4=(X)*(2500-500)/180+500
+
+void Steering_Init(void);
+void Steering_Move(const int	*p);
+void steering_set(const unsigned char *param);
+
+#endif
