@@ -5,18 +5,19 @@
 #include "delay.h"
 
 
-static int init[22];
+static int init[22]={90,112,150,150,150,
+						66,90,240,150,56,
+						90,90,90,90,90,
+						90,90,90,90,90,
+						90,90};
 
 void Steering_Init(void){
-	int i;
 	TIM2_PWM_Init(20000,71);
 	TIM3_PWM_Init(20000,71);
 	TIM5_PWM_Init(20000,71);
 	TIM1_PWM_Init(20000,71);
 	TIM8_PWM_Init(20000,71);
 	TIM4_PWM_Init(20000,71);
-	for(i=0; i<22; i++)
-		init[i]=90;
 	Steering_Move(init);
 }
 

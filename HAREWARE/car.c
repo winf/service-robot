@@ -73,6 +73,8 @@ void car_right(void){
 
 void car_stop(void){
 
+	CAR_SET_SPEED(speed_low);//减速,电机换向
+	delay_ms(500);
 	MOTOR1_STOP;
 	MOTOR2_STOP;
 	MOTOR3_STOP;

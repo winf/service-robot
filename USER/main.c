@@ -99,10 +99,10 @@ void cmd_handle(void){
     sys_init();	 //配置系统时钟72M(包括clock, PLL and Flash configuration)
 	delay_init();//初始化延时
 	uart1_init(72,9600);
-	motor_init();
+	car_init();
 	jtag_set(2);//禁止JTAG,释放PB3,PA15
 	Steering_Init();
-	car_forward();
+//	car_forward();
 	uart_printf("ok\r\n");
 	hwbz_init();
 	power_init();

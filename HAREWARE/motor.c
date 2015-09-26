@@ -10,6 +10,8 @@
 #include "uart.h"
 
 
+static void TIM6_Init(u16 arr,u16 psc);
+
 void motor_init(void){
 
     RCC->APB2ENR|=1<<6|1<<7;//PE,PF时钟使能
@@ -65,7 +67,7 @@ void TIM6_IRQHandler(void){
 //arr：自动重装值。
 //psc：时钟预分频数
 //这里使用的是定时器6!
-void TIM6_Init(u16 arr,u16 psc){
+static void TIM6_Init(u16 arr,u16 psc){
 	RCC->APB2ENR|=1<<6|1<<7;//PE,PF时钟使能
 	GPIOF->CRL&=0XFF00FFFF;//PF4,5推挽输出;
 	GPIOF->CRL|=0X00330000;

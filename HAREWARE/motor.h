@@ -23,12 +23,12 @@
 #define MOTOR3_EN(x)
 #define MOTOR4_EN(x)
 
-#define MOTOR1_IN1       PFout(0)
-#define MOTOR1_IN2       PFout(2)
+#define MOTOR1_IN2       PFout(0)
+#define MOTOR1_IN1       PFout(2)
 #define MOTOR2_IN1       PFout(1)
 #define MOTOR2_IN2       PFout(3)
-#define MOTOR3_IN1       PEout(0)
-#define MOTOR3_IN2       PEout(2)
+#define MOTOR3_IN2       PEout(0)
+#define MOTOR3_IN1       PEout(2)
 #define MOTOR4_IN1       PEout(1)
 #define MOTOR4_IN2       PEout(3)
 
@@ -91,6 +91,5 @@
 
 
 void motor_init(void);
-void TIM6_Init(u16 arr,u16 psc);
 void motor_set_speed(int car,int speed);
 #endif /* MOTOR_H_ */
