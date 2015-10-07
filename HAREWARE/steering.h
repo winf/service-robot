@@ -34,8 +34,34 @@
 #define STEERING_21(X)	TIM2->CCR3=(X)*(2500-500)/180+500
 #define STEERING_22(X)	TIM2->CCR4=(X)*(2500-500)/180+500
 
+#define GET_STEERING_1()	((TIM5->CCR1-500)*180/(2500-500))
+#define GET_STEERING_2()	((TIM5->CCR2-500)*180/(2500-500))
+#define GET_STEERING_3()	((TIM5->CCR3-1000)*300/(2000-1000))
+#define GET_STEERING_4()	((TIM5->CCR4-1000)*300/(2000-1000))
+#define GET_STEERING_5()	((TIM3->CCR1-1000)*300/(2000-1000))
+#define GET_STEERING_6()	((TIM3->CCR2-500)*180/(2500-500))
+#define GET_STEERING_7()	((TIM3->CCR3-500)*180/(2500-500))
+#define GET_STEERING_8()	((TIM3->CCR4-1000)*300/(2000-1000))
+#define GET_STEERING_9()	((TIM8->CCR1-1000)*300/(2000-1000))
+#define GET_STEERING_10()	((TIM8->CCR2-1000)*300/(2000-1000))
+#define GET_STEERING_11()	((TIM8->CCR3-500)*180/(2500-500))
+#define GET_STEERING_12()	((TIM8->CCR4-500)*180/(2500-500))
+#define GET_STEERING_13()	((TIM1->CCR1-500)*180/(2500-500))
+#define GET_STEERING_14()	((TIM1->CCR4-500)*180/(2500-500))
+#define GET_STEERING_15()	((TIM4->CCR1-500)*180/(2500-500))
+#define GET_STEERING_16()	((TIM4->CCR2-500)*180/(2500-500))
+#define GET_STEERING_17()	((TIM4->CCR3-500)*180/(2500-500))
+#define GET_STEERING_18()	((TIM4->CCR4-500)*180/(2500-500))
+#define GET_STEERING_19()	((TIM2->CCR1-500)*180/(2500-500))
+#define GET_STEERING_20()	((TIM2->CCR2-500)*180/(2500-500))
+#define GET_STEERING_21()	((TIM2->CCR3-500)*180/(2500-500))
+#define GET_STEERING_22()	((TIM2->CCR4-500)*180/(2500-500))
+
 void Steering_Init(void);
 void Steering_Move(const int	*p);
 void steering_set(const unsigned char *param);
+void steering_get(int *p);
+void steering_show(void);
+void steering_set_init(void);
 
 #endif

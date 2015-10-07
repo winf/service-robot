@@ -12,19 +12,21 @@
 #include "power.h"
 
 
-#define CMD_FORWARD  	'f'
-#define CMD_BACK     	'b'
-#define CMD_LEFT     	'l'
-#define CMD_RIGHT    	'r'
-#define CMD_STOP     	's'
-#define CMD_INIT     	'i'
-#define CMD_STANDBY  	'y'
-#define CMD_CIRCLE1 		'c'
-#define CMD_CIRCLE2		'd'
-#define CMD_MOTOR_SET	't'
-#define CMD_RESUME  		'e'
-#define CMD_POWER_SET	'p'
-#define CMD_STEER_SET	'g'
+#define CMD_FORWARD  		'f'
+#define CMD_BACK     		'b'
+#define CMD_LEFT     		'l'
+#define CMD_RIGHT    		'r'
+#define CMD_STOP     		's'
+#define CMD_INIT     		'i'
+#define CMD_STANDBY  		'y'
+#define CMD_CIRCLE1 			'c'
+#define CMD_CIRCLE2			'd'
+#define CMD_MOTOR_SET		't'
+#define CMD_RESUME  			'e'
+#define CMD_POWER_SET		'p'
+#define CMD_STEER_SET		'g'
+#define CMD_STEER_SHOW		'w'
+#define CMD_STEER_SET_INIT	'n'
 
 void cmd_handle(void){
 	unsigned char cmd;
@@ -33,6 +35,8 @@ void cmd_handle(void){
 
 	cmd = uart1_receive();
 	uart1_send_char(cmd);
+	uart2_send_char('O');
+	uart3_send_char('K');
 	switch(cmd){
 	case CMD_FORWARD://前进
 		car_forward();
@@ -91,6 +95,12 @@ void cmd_handle(void){
 			uart1_send_char(cmd_param[i]);
 		}
 		break;
+	case CMD_STEER_SHOW:
+		steering_show();
+		break;
+	case CMD_STEER_SET_INIT:
+			steering_set_init();
+			break;
 	default:break;
 	}
 }
@@ -99,10 +109,12 @@ void cmd_handle(void){
     sys_init();	 //配置系统时钟72M(包括clock, PLL and Flash configuration)
 	delay_init();//初始化延时
 	uart1_init(72,9600);
+	uart2_init(36,9600);//时钟为最高时钟的一半
+	uart3_init(36,9600);//时钟为最高时钟的一半
+	led_init();
 	car_init();
 	jtag_set(2);//禁止JTAG,释放PB3,PA15
 	Steering_Init();
-//	car_forward();
 	uart_printf("ok\r\n");
 	hwbz_init();
 	power_init();

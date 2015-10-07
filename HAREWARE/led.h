@@ -6,8 +6,8 @@
 
 
 
-#define LED0   PEout(6)
-#define LED1   PEout(5)
+#define LED0   PCout(0)
+#define LED1   PCout(1)
 
 
 

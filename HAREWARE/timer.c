@@ -10,8 +10,9 @@
 void TIM2_PWM_Init(u16 arr,u16 psc)
 {
 	//此部分需手动修改IO口设置
-	RCC->APB1ENR|=1<<0; 	//TIM4时钟使能
+	RCC->APB1ENR|=1<<0; 	//TIM2时钟使能
 	RCC->APB2ENR|=1<<2|1<<3;    	//使能PORTB,A时钟
+	RCC->APB2ENR|=0x01;//使能io复用时钟
 
 	GPIOA->CRH&=0X0FFFFFFF;	//PA15输出
 	GPIOA->CRH|=0XB0000000;	//复用功能输出

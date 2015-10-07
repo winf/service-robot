@@ -40,10 +40,15 @@ void uart2_init(u32 clk, u32 bound)	//串口二初始化
 	mantissa <<= 4;
 	mantissa += fraction;
 	RCC->APB2ENR|=0x01;//使能io复用时钟
-	RCC ->APB2ENR |= 1 << 2;		 //使能PA时钟
+
 	RCC ->APB1ENR |= 1 << 17;		 //使能PAusart2时钟
-	GPIOA ->CRL &= 0XFFFF00FF;		 //设置io口
-	GPIOA ->CRL |= 0X00008B00;
+//	RCC ->APB2ENR |= 1 << 2;		 //使能PA时钟
+//	GPIOA ->CRL &= 0XFFFF00FF;		 //设置io口
+//	GPIOA ->CRL |= 0X00008B00;
+	RCC ->APB2ENR |= 1 << 5;		 //使能PD时钟
+	GPIOD ->CRL &= 0XF00FFFFF;		 //设置io口
+	GPIOD ->CRL |= 0X0BB00000;
+	AFIO->MAPR|=1<<3;      //完全重映像
 
 
 	RCC ->APB1RSTR |= 1 << 17;		 //复位USART1
@@ -64,12 +69,19 @@ void uart3_init(u32 clk, u32 bound) //串口一初始化
 	mantissa <<= 4;
 	mantissa += fraction;
 
-	RCC ->APB2ENR |= 1 << 3 ;		 //使能PB,usart3时钟
 	RCC ->APB1ENR |= 1 << 18;		 //使能PAusart3时钟
 	RCC->APB2ENR|=0x01;//使能io复用时钟
-	GPIOB ->CRH &= 0XFFFF00FF;		 //设置io口
-	GPIOB ->CRH |= 0X0000BB00;
-	GPIOB->ODR |= 3<<10;
+
+//	RCC ->APB2ENR |= 1 << 3 ;		 //使能PB,usart3时钟
+//	GPIOB ->CRH &= 0XFFFF00FF;		 //设置io口
+//	GPIOB ->CRH |= 0X0000BB00;
+//	GPIOB->ODR |= 3<<10;
+
+	RCC ->APB2ENR |= 1 << 5;		 //使能PD时钟
+	GPIOD ->CRH &= 0XFFFFFF00;		 //设置io口
+	GPIOD ->CRH |= 0X000000BB;
+	AFIO->MAPR&= ~(3<<4); //清除MAPR的[9:8]
+	AFIO->MAPR|=3<<4;      //完全重映像
 
 	RCC ->APB1RSTR |= 1 << 18;		 //复位USART1
 	RCC ->APB1RSTR &= ~(1 << 18);		 //停止复位USART1

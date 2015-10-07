@@ -7,9 +7,11 @@
 
 void led_init(void)
 {
-    RCC->APB2ENR|=1<<6;//PE时钟
-	GPIOE->CRL&=0XF00FFFFF;//PE5,6推挽输出;
-	GPIOE->CRL|=0X03300000;
+    RCC->APB2ENR|=1<<3;//PE时钟
+	GPIOE->CRL&=0XFFFFFF00;//PC0,1推挽输出;
+	GPIOE->CRL|=0X00000033;
+	LED0=1;
+	LED1=1;
 }
 
 
