@@ -19,7 +19,7 @@ extern u16 uart1_cnt;//接收到的字节数
  void uart1_send_char(u8 data);//发送一个字节
  void uart2_send_char(u8 data);//发送一个字节
  void uart3_send_char(u8 data);//发送一个字节
- void uart1_send_str(char *p); //发送字符串
+ void uart2_send_str(const char *p); //发送字符串
  u8 uart1_receive(void);//接收一个字符
  u8 uart2_receive(void);//接收一个字符
  u8 uart3_receive(void);//接收一个字符

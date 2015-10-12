@@ -103,6 +103,15 @@ void uart2_send_char(u8 data) {
 	while (!(USART2 ->SR & 0X40))
 		;	//等待数据发送完毕
 }
+
+void uart2_send_str(const char *p){
+	while('\0' != *p){
+		USART2 ->DR = *p++; //发送数据
+		while (!(USART2 ->SR & 0X40))
+			;	//等待数据发送完毕
+	}
+}
+
 void uart3_send_char(u8 data) {
 	USART3->DR = data; //发送数据
 	while (!(USART3->SR & 0X40))
